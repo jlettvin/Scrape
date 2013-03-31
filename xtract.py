@@ -39,6 +39,8 @@ import cPickle
 import pyperclip
 
 class Get:
+
+    #**************************************************************************
     def __init__(self):
         self.types = ['.flv', '.mpg', '.mp4', '.mpeg', '.avi', '.wmv', '.mov']
         self.assoc = dict()
@@ -47,6 +49,7 @@ class Get:
             with open(self.store, 'r') as source:
                 self.assoc.update(cPickle.load(source))
 
+    #**************************************************************************
     def __call__(self, name, stream):
         # TODO make a dictionary of received files and incorporate xclip
         self.name = name.strip()
@@ -96,6 +99,7 @@ class Get:
                                     cPickle.dump(self.assoc, target)
                             print ' '*79,'\r','100%', self.name
 
+    #**************************************************************************
     def report(self, count, size, filesize):
         self.filesize = filesize
         self.percent = "%3d%%:" % (100 * count * size / filesize)
@@ -103,6 +107,7 @@ class Get:
         print self.percent, self.filename, self.name, '\r',
         sys.stdout.flush()
 
+#MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 if __name__ == "__main__":
 
     if len(sys.argv) == 2:
